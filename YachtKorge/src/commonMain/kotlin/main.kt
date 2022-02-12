@@ -25,10 +25,7 @@ suspend fun main() = Korge(width = WIDTH, height = HEIGHT, title = "YACHT", bgco
 
 	// Draw table background
 	val tableWidth = width * 0.35
-	val tableBackground = SolidRect(tableWidth, height, Colors[WHITE])
-	tableBackground.x = 0.0
-	tableBackground.y = 0.0
-	addChild(tableBackground)
+	addChild(SolidRect(tableWidth, height, Colors[WHITE]).xy(0, 0))
 
 	// Draw cell
 	val titleCellRow = 3
@@ -38,64 +35,51 @@ suspend fun main() = Korge(width = WIDTH, height = HEIGHT, title = "YACHT", bgco
 	val scoreCellWidthList = listOf(scoreCellWidth * 2, scoreCellWidth, scoreCellWidth)
 	val scoreCellHeight = (height - cellMargin * (titleCellRow + scoreCellRow + 1)) / (scoreCellRow + titleCellRow * 1.2)
 	val scoreCellHeightList = listOf(
-			scoreCellHeight * 1.2, // Categories and player name
-			scoreCellHeight, scoreCellHeight, scoreCellHeight, scoreCellHeight, scoreCellHeight, scoreCellHeight,
-			scoreCellHeight * 1.2, // Subtotal
-			scoreCellHeight, scoreCellHeight, scoreCellHeight, scoreCellHeight, scoreCellHeight, scoreCellHeight,
-			scoreCellHeight * 1.2, // Total
+		scoreCellHeight * 1.2, // Categories and player name
+		scoreCellHeight, scoreCellHeight, scoreCellHeight, scoreCellHeight, scoreCellHeight, scoreCellHeight,
+		scoreCellHeight * 1.2, // Subtotal
+		scoreCellHeight, scoreCellHeight, scoreCellHeight, scoreCellHeight, scoreCellHeight, scoreCellHeight,
+		scoreCellHeight * 1.2, // Total
 	)
 	for (i in 0 until 3) {
 		for (j in 0 until titleCellRow + scoreCellRow) {
-			val cell = SolidRect(scoreCellWidthList[i], scoreCellHeightList[j], cellColor(i, j))
 			val x = cellMargin * (i + 1) + scoreCellWidthList.subList(0, i).sum()
 			val y = cellMargin * (j + 1) + scoreCellHeightList.subList(0, j).sum()
-			cell.x = x
-			cell.y = y
-			addChild(cell)
+			addChild(SolidRect(scoreCellWidthList[i], scoreCellHeightList[j], cellColor(i, j)).xy(x, y))
 			cellText(i, j, player1Name, player2Name)?.let {
-//				val text = Text(textSize = 40.0, text = it.first, color = it.second,
-//						alignment = TextAlignment.MIDDLE_CENTER, autoScaling = true)
-				val text = Text(font = font, textSize = 35.0, text = it.first, color = it.second,
-						alignment = TextAlignment.MIDDLE_CENTER, autoScaling = true)
-				text.x = x + scoreCellWidthList[i] / 2
-				text.y = y + scoreCellHeightList[j] / 2
-				addChild(text)
+				addChild(Text(it.first, 35.0, it.second, font, TextAlignment.MIDDLE_CENTER)
+					.xy(x + scoreCellWidthList[i] / 2, y + scoreCellHeightList[j] / 2)
+				)
 			}
-
 		}
 	}
 
 	// Draw title, player name, turn, trial, dices
 	val titleWidth = WIDTH - tableWidth
 	val titleHeight = HEIGHT / 6.0
-	val title = Text(font = font, textSize = 80.0, text = "HyperGame -YACHT-", color = Colors[WHITE],
-			alignment = TextAlignment.MIDDLE_CENTER, autoScaling = true)
-	title.x = tableWidth + titleWidth / 2
-	title.y = titleHeight / 2
-	addChild(title)
+	addChild(Text("HyperGame -YACHT-", 80.0, Colors[WHITE], font, TextAlignment.MIDDLE_CENTER)
+		.xy(tableWidth + titleWidth / 2, titleHeight / 2)
+	)
 
 	val stateBoardWidth = WIDTH * 0.35
 	val playerNameY = HEIGHT * 0.3
-	val player1Text = Text(font = font, textSize = 60.0, text = player1Name, color = Colors[WHITE],
-			alignment = TextAlignment.MIDDLE_CENTER, autoScaling = true)
-	player1Text.x = tableWidth + stateBoardWidth / 4
-	player1Text.y = playerNameY
-	addChild(player1Text)
-	val player2Text = Text(font = font, textSize = 60.0, text = player2Name, color = Colors[WHITE],
-			alignment = TextAlignment.MIDDLE_CENTER, autoScaling = true)
-	player2Text.x = tableWidth + stateBoardWidth - stateBoardWidth / 4
-	player2Text.y = playerNameY
-	addChild(player2Text)
-	val vsText = Text(font = font, textSize = 40.0, text = "vs.", color = Colors[WHITE],
-			alignment = TextAlignment.MIDDLE_CENTER, autoScaling = true)
-	vsText.x = tableWidth + stateBoardWidth / 2
-	vsText.y = playerNameY
-	addChild(vsText)
-	vsText.text = "vs."
+	addChild(Text(player1Name, 60.0, Colors[WHITE], font, TextAlignment.MIDDLE_CENTER)
+		.xy(tableWidth + stateBoardWidth / 4, playerNameY)
+	)
+	addChild(Text(player2Name, 60.0, Colors[WHITE], font, TextAlignment.MIDDLE_CENTER)
+		.xy(tableWidth + stateBoardWidth - stateBoardWidth / 4, playerNameY)
+	)
+	addChild(Text("vs.", 40.0, Colors[WHITE], font, TextAlignment.MIDDLE_CENTER)
+		.xy(tableWidth + stateBoardWidth / 2, playerNameY)
+	)
 
 	val diceBoardWidth = WIDTH - tableWidth - stateBoardWidth
-	val dice1Image = resourcesVfs["1.png"].readBitmap()
-	val dice1 = image(dice1Image).size(100, 100).xy(1200, 200)
+	val dice1 = image(resourcesVfs["1.png"].readBitmap()).size(100, 100).xy(1300, 150)
+	val dice2 = image(resourcesVfs["2.png"].readBitmap()).size(100, 100).xy(1300, 270)
+	val dice3 = image(resourcesVfs["3.png"].readBitmap()).size(100, 100).xy(1300, 390)
+	val dice4 = image(resourcesVfs["4.png"].readBitmap()).size(100, 100).xy(1300, 510)
+	val dice5 = image(resourcesVfs["5.png"].readBitmap()).size(100, 100).xy(1300, 630)
+	val dice6 = image(resourcesVfs["6.png"].readBitmap()).size(100, 100).xy(1300, 750)
 
 //
 //	val player1Score = ObservableProperty(Score())
@@ -150,4 +134,3 @@ fun cellText(row: Int, col: Int, player1Name: String, player2Name: String): Pair
 //	val yacht: String = "-",
 //	val total: String = "-"
 //)
-
