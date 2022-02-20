@@ -1,0 +1,321 @@
+{
+  "players": ["TB", "JM"],
+  "log": [
+    {
+      "turn": 1,
+      "player": "TB",
+      "trial": 1,
+      "dices": [1, 2, 3, 4, 5],
+      "scoreBoard": {
+        "TB": {
+          "aces": null,
+          "deuces": null,
+          "threes": null,
+          "fours": null,
+          "fives": null,
+          "sixes": null,
+          "subtotal": 0,
+          "choice": null,
+          "fourOfAKind": null,
+          "fullHouse": null,
+          "smallStraight": null,
+          "largeStraight": null,
+          "yacht": null,
+          "total": 0
+        },
+        "JM": {
+          "aces": null,
+          "deuces": null,
+          "threes": null,
+          "fours": null,
+          "fives": null,
+          "sixes": null,
+          "subtotal": 0,
+          "choice": null,
+          "fourOfAKind": null,
+          "fullHouse": null,
+          "smallStraight": null,
+          "largeStraight": null,
+          "yacht": null,
+          "total": 0
+        }
+      },
+      "decision": {
+        "keepDices": [
+          0, 1, 2, 3, 4
+        ],
+        "decision": "smallStraight"
+      }
+    },
+    {
+      "turn": 1,
+      "player": "JM",
+      "trial": 1,
+      "dices": [2, 6, 4, 1, 5],
+      "scoreBoard": {
+        "TB": {
+          "aces": null,
+          "deuces": null,
+          "threes": null,
+          "fours": null,
+          "fives": null,
+          "sixes": null,
+          "subtotal": 0,
+          "choice": null,
+          "fourOfAKind": null,
+          "fullHouse": null,
+          "smallStraight": 15,
+          "largeStraight": null,
+          "yacht": null,
+          "total": 15
+        },
+        "JM": {
+          "aces": null,
+          "deuces": null,
+          "threes": null,
+          "fours": null,
+          "fives": null,
+          "sixes": null,
+          "subtotal": 0,
+          "choice": null,
+          "fourOfAKind": null,
+          "fullHouse": null,
+          "smallStraight": null,
+          "largeStraight": null,
+          "yacht": null,
+          "total": 0
+        }
+      },
+      "decision": {
+        "keepDices": [
+          0, 1, 2, 4
+        ]
+      }
+    },
+    {
+      "turn": 1,
+      "player": "JM",
+      "trial": 2,
+      "dices": [2, 6, 4, 3, 5],
+      "scoreBoard": {
+        "TB": {
+          "aces": null,
+          "deuces": null,
+          "threes": null,
+          "fours": null,
+          "fives": null,
+          "sixes": null,
+          "subtotal": 0,
+          "choice": null,
+          "fourOfAKind": null,
+          "fullHouse": null,
+          "smallStraight": 15,
+          "largeStraight": null,
+          "yacht": null,
+          "total": 15
+        },
+        "JM": {
+          "aces": null,
+          "deuces": null,
+          "threes": null,
+          "fours": null,
+          "fives": null,
+          "sixes": null,
+          "subtotal": 0,
+          "choice": null,
+          "fourOfAKind": null,
+          "fullHouse": null,
+          "smallStraight": null,
+          "largeStraight": null,
+          "yacht": null,
+          "total": 0
+        }
+      },
+      "decision": {
+        "keepDices": [
+          0, 1, 2, 3, 4
+        ],
+        "decision": "largeStraight"
+      }
+    },
+    {
+      "turn": 2,
+      "player": "TB",
+      "trial": 1,
+      "dices": [1, 1, 1, 1, 2],
+      "scoreBoard": {
+        "TB": {
+          "aces": null,
+          "deuces": null,
+          "threes": null,
+          "fours": null,
+          "fives": null,
+          "sixes": null,
+          "subtotal": 0,
+          "choice": null,
+          "fourOfAKind": null,
+          "fullHouse": null,
+          "smallStraight": 15,
+          "largeStraight": null,
+          "yacht": null,
+          "total": 15
+        },
+        "JM": {
+          "aces": null,
+          "deuces": null,
+          "threes": null,
+          "fours": null,
+          "fives": null,
+          "sixes": null,
+          "subtotal": 0,
+          "choice": null,
+          "fourOfAKind": null,
+          "fullHouse": null,
+          "smallStraight": null,
+          "largeStraight": 30,
+          "yacht": null,
+          "total": 30
+        }
+      },
+      "decision": {
+        "keepDices": [
+          0, 1, 2, 3
+        ]
+      }
+    },
+    {
+      "turn": 2,
+      "player": "TB",
+      "trial": 2,
+      "dices": [1, 1, 1, 1, 4],
+      "scoreBoard": {
+        "TB": {
+          "aces": null,
+          "deuces": null,
+          "threes": null,
+          "fours": null,
+          "fives": null,
+          "sixes": null,
+          "subtotal": 0,
+          "choice": null,
+          "fourOfAKind": null,
+          "fullHouse": null,
+          "smallStraight": 15,
+          "largeStraight": null,
+          "yacht": null,
+          "total": 15
+        },
+        "JM": {
+          "aces": null,
+          "deuces": null,
+          "threes": null,
+          "fours": null,
+          "fives": null,
+          "sixes": null,
+          "subtotal": 0,
+          "choice": null,
+          "fourOfAKind": null,
+          "fullHouse": null,
+          "smallStraight": null,
+          "largeStraight": 30,
+          "yacht": null,
+          "total": 30
+        }
+      },
+      "decision": {
+        "keepDices": [
+          0, 1, 2, 3
+        ]
+      }
+    },
+    {
+      "turn": 2,
+      "player": "TB",
+      "trial": 3,
+      "dices": [1, 1, 1, 1, 5],
+      "scoreBoard": {
+        "TB": {
+          "aces": null,
+          "deuces": null,
+          "threes": null,
+          "fours": null,
+          "fives": null,
+          "sixes": null,
+          "subtotal": 0,
+          "choice": null,
+          "fourOfAKind": null,
+          "fullHouse": null,
+          "smallStraight": 15,
+          "largeStraight": null,
+          "yacht": null,
+          "total": 15
+        },
+        "JM": {
+          "aces": null,
+          "deuces": null,
+          "threes": null,
+          "fours": null,
+          "fives": null,
+          "sixes": null,
+          "subtotal": 0,
+          "choice": null,
+          "fourOfAKind": null,
+          "fullHouse": null,
+          "smallStraight": null,
+          "largeStraight": 30,
+          "yacht": null,
+          "total": 30
+        }
+      },
+      "decision": {
+        "keepDices": [
+          0, 1, 2, 3, 4
+        ],
+        "decision": "aces"
+      }
+    }
+  ],
+  "final": {
+    "dices": [
+      0,
+      0,
+      0,
+      0,
+      0
+    ],
+    "scoreBoard": {
+      "TB": {
+        "aces": 4,
+        "deuces": null,
+        "threes": null,
+        "fours": null,
+        "fives": null,
+        "sixes": null,
+        "subtotal": 4,
+        "choice": null,
+        "fourOfAKind": null,
+        "fullHouse": null,
+        "smallStraight": 15,
+        "largeStraight": null,
+        "yacht": null,
+        "total": 19
+      },
+      "JM": {
+        "aces": null,
+        "deuces": null,
+        "threes": null,
+        "fours": null,
+        "fives": null,
+        "sixes": null,
+        "subtotal": 0,
+        "choice": null,
+        "fourOfAKind": null,
+        "fullHouse": null,
+        "smallStraight": null,
+        "largeStraight": 30,
+        "yacht": null,
+        "total": 30
+      }
+    }
+  }
+}
