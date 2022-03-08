@@ -17,7 +17,8 @@ var isStarted = false
 val trialState = ObservableProperty(TrialState.INIT)
 val currentGameState = ObservableProperty(GameState())
 
-suspend fun main() = Korge(width = WIDTH, height = HEIGHT, title = "YACHT", bgcolor = Colors[MAIN_COLOR]) {
+suspend fun main() = Korge(width = WIDTH, height = HEIGHT, title = title, bgcolor = Colors[MAIN_COLOR],
+	virtualWidth = VIRTUAL_WIDTH, virtualHeight = VIRTUAL_HEIGHT) {
 	val font = TtfFont(resourcesVfs["DOS_font.ttf"].readAll())
 
 	// Read json file
@@ -35,8 +36,8 @@ suspend fun main() = Korge(width = WIDTH, height = HEIGHT, title = "YACHT", bgco
 	// Draw table background
 	val defaultTableWidthRatio = 0.35
 	val additionalTableWidthRatio = 0.1
-	val tableWidth = WIDTH * (defaultTableWidthRatio + (gamePlot.players.size - 2) * additionalTableWidthRatio)
-	solidRect(tableWidth, HEIGHT.toDouble(), Colors[WHITE]).xy(0, 0)
+	val tableWidth = VIRTUAL_WIDTH * (defaultTableWidthRatio + (gamePlot.players.size - 2) * additionalTableWidthRatio)
+	solidRect(tableWidth, VIRTUAL_HEIGHT.toDouble(), Colors[WHITE]).xy(0, 0)
 
 	// Draw cell
 	val titleCellRow = 3
@@ -45,7 +46,7 @@ suspend fun main() = Korge(width = WIDTH, height = HEIGHT, title = "YACHT", bgco
 	val cellMargin = 2.0
 	val scoreCellWidth = (tableWidth - (gamePlot.players.size + 2) * cellMargin) / (gamePlot.players.size + 2)
 	val cellWidthList = listOf(scoreCellWidth * 2).plus(gamePlot.players.map { scoreCellWidth })
-	val scoreCellHeight = ((HEIGHT - cellMargin * (titleCellRow + scoreCellRow + 1))
+	val scoreCellHeight = ((VIRTUAL_HEIGHT - cellMargin * (titleCellRow + scoreCellRow + 1))
 		/ (scoreCellRow + titleCellRow * titleCellHeightRatio))
 	val cellHeightList = listOf(
 		scoreCellHeight * titleCellHeightRatio, // "Categories" and player's name
@@ -84,7 +85,7 @@ suspend fun main() = Korge(width = WIDTH, height = HEIGHT, title = "YACHT", bgco
 			}
 		}
 		// Draw dimmer
-		solidRect(scoreCellWidth, HEIGHT.toDouble() - cellMargin * 2, Colors[BLACK]) {
+		solidRect(scoreCellWidth, VIRTUAL_HEIGHT.toDouble() - cellMargin * 2, Colors[BLACK]) {
 			alpha(0.6).xy(cellMargin * (col + 1) + cellWidthList.subList(0, (col)).sum(), cellMargin)
 			currentGameState.observe {
 				alpha = if (player == currentGameState.value.player) 0.0 else 0.6
@@ -96,9 +97,9 @@ suspend fun main() = Korge(width = WIDTH, height = HEIGHT, title = "YACHT", bgco
 	}
 
 	// Draw title
-	val titleWidth = WIDTH - tableWidth
-	val titleHeight = HEIGHT / 6.0
-	val title = text("HyperGame - YACHT", 80.0, Colors[WHITE], font) {
+	val titleWidth = VIRTUAL_WIDTH - tableWidth
+	val titleHeight = VIRTUAL_HEIGHT / 6.0
+	val title = text(title, 80.0, Colors[WHITE], font) {
 		setTextBounds(Rectangle(0.0, 0.0, titleWidth, titleHeight))
 		alignment = TextAlignment.MIDDLE_CENTER
 		xy(tableWidth, 0.0)
@@ -107,7 +108,7 @@ suspend fun main() = Korge(width = WIDTH, height = HEIGHT, title = "YACHT", bgco
 	// Draw dices and keep/free
 	val diceSize = 100.0
 	val diceStateTextWidth = 120.0
-	val diceMargin = (HEIGHT - titleHeight - diceSize * 5) / 6.0
+	val diceMargin = (VIRTUAL_HEIGHT - titleHeight - diceSize * 5) / 6.0
 	val diceBoardWidth = diceSize + diceStateTextWidth + diceMargin * 3
 	val diceImageSourceList = listOf(
 		resourcesVfs["0.png"].readBitmapSlice(),
@@ -123,7 +124,7 @@ suspend fun main() = Korge(width = WIDTH, height = HEIGHT, title = "YACHT", bgco
 		val diceStateText = text(getDiceState(currentGameState.value.decision.keepDices, i), 40.0, Colors[WHITE], font) {
 			setTextBounds(Rectangle(0.0, 0.0, diceStateTextWidth, diceSize))
 			alignment = TextAlignment.MIDDLE_CENTER
-			xy(WIDTH - diceMargin - diceStateTextWidth, titleHeight + diceSize * (i) + diceMargin * (i + 1))
+			xy(VIRTUAL_WIDTH - diceMargin - diceStateTextWidth, titleHeight + diceSize * (i) + diceMargin * (i + 1))
 			currentGameState.observe {
 				text = getDiceState(currentGameState.value.decision.keepDices, i)
 			}
@@ -162,15 +163,15 @@ suspend fun main() = Korge(width = WIDTH, height = HEIGHT, title = "YACHT", bgco
 	}
 
 	// Draw player name, turn, trial
-	val stateBoardWidth = WIDTH - tableWidth - diceBoardWidth
-	text(gamePlot.players.joinToString(" vs "), 60.0, Colors[WHITE], font) {
+	val stateBoardWidth = VIRTUAL_WIDTH - tableWidth - diceBoardWidth
+	text(gamePlot.players.joinToString(" vs "), 50.0, Colors[WHITE], font) {
 		setTextBounds(Rectangle(0.0, 0.0, stateBoardWidth, 150.0))
 		alignLeftToLeftOf(title)
 		alignTopToBottomOf(title, 50.0)
 		alignment = TextAlignment.MIDDLE_CENTER
 	}
 
-	text("", 40.0, Colors[WHITE], font) {
+	text("", 30.0, Colors[WHITE], font) {
 		setTextBounds(Rectangle(0.0, 0.0, stateBoardWidth, 150.0))
 		alignment = TextAlignment.MIDDLE_CENTER
 		alignLeftToLeftOf(title)
@@ -192,7 +193,7 @@ suspend fun main() = Korge(width = WIDTH, height = HEIGHT, title = "YACHT", bgco
 	}
 
 	// Draw result text
-	text("", 90.0, Colors[WHITE], font) {
+	text("", 50.0, Colors[WHITE], font) {
 		setTextBounds(Rectangle(0.0, 0.0, stateBoardWidth, 100.0))
 		alignment = TextAlignment.MIDDLE_CENTER
 		alignLeftToLeftOf(title)

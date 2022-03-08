@@ -52,15 +52,15 @@ suspend fun readGamePlot(): GamePlot {
         players = players,
         gameStateList = gamePlotJson.dyn["log"].toList().map {
             GameState(
-                turn = it.dyn["turn"].toInt(),
-                player = it.dyn["player"].toString(),
-                trial = it.dyn["trial"].toInt(),
-                dices = it.dyn["dices"].toList().map { dice -> dice.toInt() },
-                scoreBoard = readScoreBoard(it.dyn["scoreBoard"], players),
+                turn = it.dyn["state"].dyn["turn"].toInt(),
+                player = it.dyn["state"].dyn["player"].toString(),
+                trial = it.dyn["state"].dyn["trial"].toInt(),
+                dices = it.dyn["state"].dyn["dices"].toList().map { dice -> dice.toInt() },
+                scoreBoard = readScoreBoard(it.dyn["state"].dyn["scoreBoard"], players),
                 decision = it.dyn["decision"].let { decision ->
                     Decision(
-                        keepDices = decision.dyn["keepDices"].toList().map{ dice -> dice.toInt() },
-                        decision = decision.dyn["decision"].toStringOrNull()
+                        keepDices = decision.dyn["keep"].toList().map{ dice -> dice.toInt() },
+                        decision = decision.dyn["choice"].toStringOrNull()
                     )
                 }
             )
@@ -85,7 +85,7 @@ fun readScore(score: Dyn): Score {
         sixes = if (score["sixes"].isNull) null else score["sixes"].toInt(),
         subtotal = score["subtotal"].toInt(),
         choice = if (score["choice"].isNull) null else score["choice"].toInt(),
-        fourOfAKind = if (score["fourOfAKind"].isNull) null else score["fourOfAKind"].toInt(),
+        fourOfAKind = if (score["fourKind"].isNull) null else score["fourKind"].toInt(),
         fullHouse = if (score["fullHouse"].isNull) null else score["fullHouse"].toInt(),
         smallStraight = if (score["smallStraight"].isNull) null else score["smallStraight"].toInt(),
         largeStraight = if (score["largeStraight"].isNull) null else score["largeStraight"].toInt(),
