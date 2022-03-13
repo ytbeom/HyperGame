@@ -51,7 +51,7 @@ fun updateGameState(gamePlot: GamePlot) {
                     gamePlot.gameStateList[plotIndex + 1].scoreBoard
                 }
                 else {
-                    gamePlot.final
+                    gamePlot.final.scoreBoard
                 }
                 currentGameState.update(
                     currentGameState.value.copy(
@@ -72,18 +72,21 @@ fun updateGameState(gamePlot: GamePlot) {
                 trialState.update(TrialState.KEEP_DICES)
             }
         TrialState.KEEP_DICES -> {
-            println("go to ROLLING STATE!!")
-            if (plotIndex == gamePlot.gameStateList.size - 1) {
-                throw InvalidGamePlotException("Another game state is needed after KEEP_DICES")
-            }
-            plotIndex += 1
-            currentGameState.update(
-                currentGameState.value.copy(
-                    turn = gamePlot.gameStateList[plotIndex].turn,
-                    trial = gamePlot.gameStateList[plotIndex].trial
+            if (plotIndex != gamePlot.gameStateList.size -1) {
+                println("go to ROLLING STATE!!")
+                plotIndex += 1
+                currentGameState.update(
+                        currentGameState.value.copy(
+                                turn = gamePlot.gameStateList[plotIndex].turn,
+                                trial = gamePlot.gameStateList[plotIndex].trial
+                        )
                 )
-            )
-            trialState.update(TrialState.ROLLING)
+                trialState.update(TrialState.ROLLING)
+            }
+            else {
+                println("go to FINISH STATE!!")
+                trialState.update(TrialState.FINISH)
+            }
         }
         TrialState.PUT_SCORE -> {
             if (plotIndex != gamePlot.gameStateList.size -1) {
@@ -112,7 +115,7 @@ fun updateGameState(gamePlot: GamePlot) {
 fun finishGame(gamePlot: GamePlot) {
     currentGameState.update(
         currentGameState.value.copy(
-            scoreBoard = gamePlot.final
+            scoreBoard = gamePlot.final.scoreBoard
         )
     )
     trialState.update(TrialState.FINISH)

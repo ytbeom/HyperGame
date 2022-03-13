@@ -199,7 +199,18 @@ suspend fun main() = Korge(width = WIDTH, height = HEIGHT, title = title, bgcolo
 		alignLeftToLeftOf(title)
 		alignTopToBottomOf(title, 400.0)
 		trialState.observe {
-			text = getFinalText(currentGameState.value, gamePlot.players)
+			val winnerText = """
+				${gamePlot.final.winner.joinToString()}  WIN!!!
+				
+				""".trimIndent()
+			val foulText = if (gamePlot.final.foulBy.isNullOrBlank()) {
+				""
+			} else {
+				"""
+				foul: ${gamePlot.final.foulBy}
+				""".trimIndent()
+			}
+			text = winnerText + foulText
 			alpha = if (trialState.value == TrialState.FINISH) 1.0 else 0.0
 		}
 	}

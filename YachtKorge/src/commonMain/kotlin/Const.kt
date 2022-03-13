@@ -1,5 +1,5 @@
-const val WIDTH = 2400
-const val HEIGHT = 1350
+const val WIDTH = 1600
+const val HEIGHT = 900
 const val VIRTUAL_WIDTH = 1600
 const val VIRTUAL_HEIGHT = 900
 const val WHITE = "#ffffff"
