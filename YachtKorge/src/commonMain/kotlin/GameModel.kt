@@ -10,7 +10,7 @@ enum class TrialState {
 data class GamePlot (
     val players: List<String>,
     val gameStateList: List<GameState>,
-    val final: Map<String, Score>
+    val final: Final
 )
 
 data class GameState (
@@ -44,6 +44,13 @@ data class Decision (
     val decision: String? = null
 )
 
+data class Final (
+    val scoreBoard: Map<String, Score>,
+    val winner: List<String> = emptyList(),
+    val foulBy: String?,
+    val foulDetail: String?
+)
+
 suspend fun readGamePlot(): GamePlot {
     val gamePlotJson = Json.parse(resourcesVfs["$fileName.json"].readString())
     val players = gamePlotJson.dyn["players"].toList().map { it.toString() }
@@ -65,7 +72,12 @@ suspend fun readGamePlot(): GamePlot {
                 }
             )
         },
-        final = readScoreBoard(gamePlotJson.dyn["final"].dyn["scoreBoard"], players)
+        final = Final(
+            scoreBoard = readScoreBoard(gamePlotJson.dyn["final"].dyn["scoreBoard"], players),
+            winner = gamePlotJson.dyn["final"].dyn["winner"].toList().map { it.toString() },
+            foulBy = gamePlotJson.dyn["final"].dyn["foulBy"].toStringOrNull(),
+            foulDetail = gamePlotJson.dyn["final"].dyn["foulDetail"].toStringOrNull()
+        )
     )
 }
 
