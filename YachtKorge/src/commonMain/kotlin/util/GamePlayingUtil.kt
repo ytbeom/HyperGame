@@ -45,7 +45,7 @@ fun updateGameState(gamePlot: GamePlot) {
             trialState.update(TrialState.SHOW_DICES)
         }
         TrialState.SHOW_DICES ->
-            if (gameState.decision.decision != null || gameState.trial == 3) {
+            if (!gameState.decision.decision.isNullOrBlank() || gameState.trial == 3) {
                 println("go to PUT SCORE STATE!!")
                 val scoreBoard = if (plotIndex != gamePlot.gameStateList.size -1) {
                     gamePlot.gameStateList[plotIndex + 1].scoreBoard
